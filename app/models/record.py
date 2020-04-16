@@ -13,15 +13,15 @@ class Record(object):
         percentage_today=None,
     ):
         self.date = date
-        if confirmed_cases == '':
+        if confirmed_cases in ['', "N/A"]:
             confirmed_cases = 0
-        if probable_cases == '':
+        if probable_cases in ['', "N/A"]:
             probable_cases = 0
-        if deaths == '':
+        if deaths in ['', "N/A"]:
             deaths = 0
-        if tested == '':
+        if tested in ['', "N/A"]:
             tested = 0
-        if recoveries == '':
+        if recoveries in ['', "N/A"]:
             recoveries = 0
         self.confirmed_cases = int(confirmed_cases)
         self.probable_cases = int(probable_cases)
@@ -33,6 +33,18 @@ class Record(object):
         self.testing_rate = testing_rate
         self.new_cases_today = new_cases_today
         self.percentage_today = percentage_today
+
+    def get_confirmed_cases(self):
+        return self.confirmed_cases
+
+    def get_date(self):
+        return self.date
+
+    def get_deaths(self):
+        return self.deaths
+
+    def get_recovered(self):
+        return self.recoveries
 
     def __str__(self):
         return f"Date: {self.date}, Confirmed Cases: {self.confirmed_cases}, Probable Cases: {self.probable_cases}," \

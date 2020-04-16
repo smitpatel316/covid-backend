@@ -14,8 +14,8 @@ def after_request(response):
 
 
 @app.route("/")
-def home():
-    return "On Home"
+def index():
+    return "Backend is running!"
 
 
 app.register_blueprint(canada)
