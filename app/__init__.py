@@ -13,4 +13,9 @@ def after_request(response):
     return response
 
 
+@app.route("/")
+def home():
+    return "On Home"
+
+
 app.register_blueprint(canada)
