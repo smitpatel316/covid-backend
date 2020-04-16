@@ -1,1 +1,2 @@
-web: gunicorn covid-backend:app --log-file -
+web: gunicorn covid-backend:app
+worker: rq worker covid-backend-tasks
