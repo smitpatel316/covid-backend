@@ -1,5 +1,4 @@
 from flask import Flask
-import os
 
 from app.controllers.canada import canada
 
