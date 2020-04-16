@@ -19,3 +19,7 @@ def home():
 
 
 app.register_blueprint(canada)
+
+
+if __name__ == "__main__":
+    app.run()
