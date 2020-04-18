@@ -1,5 +1,7 @@
-from flask import Blueprint, jsonify
 import json
+
+from flask import Blueprint
+
 from app.services import canada as service
 
 canada = Blueprint("canada", __name__, url_prefix="/canada")
@@ -33,6 +35,11 @@ def canada_daily_cases():
 @canada.route("/daily/rate")
 def canada_daily_rate():
     return json.dumps(service.daily_rate_change())
+
+
+@canada.route("/daily/total")
+def canada_daily_total():
+    return json.dumps(service.daily_total_cases())
 
 
 @canada.route("/today/cases")

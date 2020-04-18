@@ -1,7 +1,9 @@
+import csv
+
+from requests import get
+
 from app.models.data import Data
 from app.models.record import Record
-import csv
-from requests import get
 
 CANADA_HEALTH = "https://health-infobase.canada.ca/src/data/covidLive/covid19.csv"
 CORONA_NINJA = "https://corona.lmao.ninja/v2/countries/Canada"
@@ -43,7 +45,7 @@ def daily_cases(name="Canada"):
             date_to_cases.update(
                 {
                     record.get_date(): record.get_confirmed_cases()
-                    - records[index - 1].get_confirmed_cases()
+                                       - records[index - 1].get_confirmed_cases()
                 }
             )
     return date_to_cases
@@ -69,5 +71,12 @@ def active_cases(name="Canada"):
 def daily_active_cases(name="Canada"):
     return {
         record.get_date(): record.get_active_cases()
+        for record in data_by_name(name).get_records()
+    }
+
+
+def daily_total_cases(name="Canada"):
+    return {
+        record.get_date(): record.get_confirmed_cases()
         for record in data_by_name(name).get_records()
     }
