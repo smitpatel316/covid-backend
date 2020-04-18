@@ -3,11 +3,12 @@ from app.models.record import Record
 import csv
 from requests import get
 
-URL = "https://health-infobase.canada.ca/src/data/covidLive/covid19.csv"
+CANADA_HEALTH = "https://health-infobase.canada.ca/src/data/covidLive/covid19.csv"
+CORONA_NINJA = "https://corona.lmao.ninja/v2/countries/Canada"
 
 
 def data_by_name(name="Canada") -> Data:
-    response = get(url=URL)
+    response = get(url=CANADA_HEALTH)
     records = list(
         csv.reader(response.content.decode("utf-8").splitlines(), delimiter=",")
     )
@@ -63,3 +64,10 @@ def daily_rate_of_change(name="Canada"):
 
 def active_cases(name="Canada"):
     return data_by_name(name).active_cases()
+
+
+def daily_active_cases(name="Canada"):
+    return {
+        record.get_date(): record.get_active_cases()
+        for record in data_by_name(name).get_records()
+    }

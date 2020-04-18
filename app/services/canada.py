@@ -19,3 +19,7 @@ def daily_rate_change():
 
 def active_cases():
     return utils.active_cases("Canada")
+
+
+def daily_active_cases():
+    return utils.daily_active_cases("Canada")

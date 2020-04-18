@@ -13,11 +13,7 @@ class Data(object):
         return self.records[-1].get_confirmed_cases()
 
     def active_cases(self) -> int:
-        return (
-            self.records[-1].get_confirmed_cases()
-            - self.records[-1].get_deaths()
-            - self.records[-1].get_recovered()
-        )
+        return self.records[-1].get_active_cases()
 
     def get_records(self):
         return self.records
