@@ -42,6 +42,6 @@ def canada_daily_total():
     return json.dumps(service.daily_total_cases())
 
 
-@canada.route("/today/cases")
-def canada_today_cases():
-    return
+@canada.route("/info")
+def canada_info():
+    return json.dumps(service.info())

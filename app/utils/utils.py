@@ -80,3 +80,16 @@ def daily_total_cases(name="Canada"):
         record.get_date(): record.get_confirmed_cases()
         for record in data_by_name(name).get_records()
     }
+
+
+def info(name="Canada"):
+    data = data_by_name(name)
+    new_cases = data.new_total_cases()
+    new_active = data.new_active_cases()
+    new_recovered = data.new_recovered_cases()
+    new_deaths = data.new_deaths()
+
+    return [f"Confirmed: {data.total_cases()} ({'+' if new_cases > 0 else ''}{new_cases})",
+            f"Active: {data.active_cases()} ({'+' if new_active > 0 else ''}{new_active})",
+            f"Recovered: {data.recovered_cases()} ({'+' if new_recovered > 0 else ''}{new_recovered})",
+            f"Deaths: {data.deaths()} ({'+' if new_deaths > 0 else ''}{new_deaths})"]

@@ -27,3 +27,6 @@ def daily_active_cases():
 
 def daily_total_cases():
     return utils.daily_total_cases("Canada")
+
+def info():
+    return utils.info("Canada")
