@@ -15,8 +15,21 @@ def data_by_name(name="Canada") -> Data:
         csv.reader(response.content.decode("utf-8").splitlines(), delimiter=",")
     )
     data = Data(name)
-    for record in records:
+    prev_record = {}
+    for (index, record) in enumerate(records):
         if record[1] == name:
+            for (record_index, field) in enumerate(record):
+                if field in ["", "N/A"]:
+                    if index == 0:
+                        record[record_index] = 0
+                        prev_record.update({record_index: 0})
+                    else:
+                        if record_index not in prev_record:
+                            prev_record.update({record_index: 0})
+                        record[record_index] = prev_record[record_index]
+                else:
+                    prev_record.update({record_index: field})
+
             data.add_record(
                 Record(
                     date=record[3],
