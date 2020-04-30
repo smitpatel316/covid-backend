@@ -1,32 +1,37 @@
 from app.utils import utils
 
 
-def all_data():
-    return utils.data_by_name("Canada")
+def regions():
+    return utils.available_regions()
 
 
-def total_cases():
-    return utils.total_cases("Canada")
+def all_data(name):
+    return utils.data_by_name(name)
 
 
-def daily_cases():
-    return utils.daily_cases("Canada")
+def total_cases(name):
+    return utils.total_cases(name)
 
 
-def daily_rate_change():
-    return utils.daily_rate_of_change("Canada")
+def daily_cases(name):
+    return utils.daily_cases(name)
 
 
-def active_cases():
-    return utils.active_cases("Canada")
+def daily_rate_change(name):
+    return utils.daily_rate_of_change(name)
 
 
-def daily_active_cases():
-    return utils.daily_active_cases("Canada")
+def active_cases(name):
+    return utils.active_cases(name)
 
 
-def daily_total_cases():
-    return utils.daily_total_cases("Canada")
+def daily_active_cases(name):
+    return utils.daily_active_cases(name)
 
-def info():
-    return utils.info("Canada")
+
+def daily_total_cases(name):
+    return utils.daily_total_cases(name)
+
+
+def info(name):
+    return utils.info(name)

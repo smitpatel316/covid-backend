@@ -6,8 +6,18 @@ from app.models.data import Data
 from app.models.record import Record
 
 CANADA_HEALTH = "https://health-infobase.canada.ca/src/data/covidLive/covid19.csv"
-CORONA_NINJA = "https://corona.lmao.ninja/v2/countries/Canada"
 
+
+def available_regions():
+    response = get(url=CANADA_HEALTH)
+    records = list(csv.reader(response.content.decode("utf-8").splitlines(), delimiter=","))
+    regions = []
+    for record in reversed(records):
+        if record[1] not in regions:
+            regions.append(record[1])
+        else:
+            break
+    return regions
 
 def data_by_name(name="Canada") -> Data:
     response = get(url=CANADA_HEALTH)
