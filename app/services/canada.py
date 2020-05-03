@@ -35,3 +35,7 @@ def daily_total_cases(name):
 
 def info(name):
     return utils.info(name)
+
+
+def daily_recoveries(name):
+    return utils.daily_recoveries(name)

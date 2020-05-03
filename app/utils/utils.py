@@ -10,7 +10,9 @@ CANADA_HEALTH = "https://health-infobase.canada.ca/src/data/covidLive/covid19.cs
 
 def available_regions():
     response = get(url=CANADA_HEALTH)
-    records = list(csv.reader(response.content.decode("utf-8").splitlines(), delimiter=","))
+    records = list(
+        csv.reader(response.content.decode("utf-8").splitlines(), delimiter=",")
+    )
     regions = []
     for record in reversed(records):
         if record[1] not in regions:
@@ -18,6 +20,7 @@ def available_regions():
         else:
             break
     return regions
+
 
 def data_by_name(name="Canada") -> Data:
     response = get(url=CANADA_HEALTH)
@@ -68,7 +71,7 @@ def daily_cases(name="Canada"):
             date_to_cases.update(
                 {
                     record.get_date(): record.get_confirmed_cases()
-                                       - records[index - 1].get_confirmed_cases()
+                    - records[index - 1].get_confirmed_cases()
                 }
             )
     return date_to_cases
@@ -112,7 +115,25 @@ def info(name="Canada"):
     new_recovered = data.new_recovered_cases()
     new_deaths = data.new_deaths()
 
-    return [f"Confirmed: {data.total_cases()} ({'+' if new_cases > 0 else ''}{new_cases})",
-            f"Active: {data.active_cases()} ({'+' if new_active > 0 else ''}{new_active})",
-            f"Recovered: {data.recovered_cases()} ({'+' if new_recovered > 0 else ''}{new_recovered})",
-            f"Deaths: {data.deaths()} ({'+' if new_deaths > 0 else ''}{new_deaths})"]
+    return [
+        f"Confirmed: {data.total_cases()} ({'+' if new_cases > 0 else ''}{new_cases})",
+        f"Active: {data.active_cases()} ({'+' if new_active > 0 else ''}{new_active})",
+        f"Recovered: {data.recovered_cases()} ({'+' if new_recovered > 0 else ''}{new_recovered})",
+        f"Deaths: {data.deaths()} ({'+' if new_deaths > 0 else ''}{new_deaths})",
+    ]
+
+
+def daily_recoveries(name="Canada"):
+    records: [Record] = data_by_name(name).get_records()
+    date_to_recoveries = {}
+    for (index, record) in enumerate(records):
+        if index == 0:
+            date_to_recoveries.update({record.get_date(): record.get_recovered()})
+        else:
+            date_to_recoveries.update(
+                {
+                    record.get_date(): record.get_recovered()
+                    - records[index - 1].get_recovered()
+                }
+            )
+    return date_to_recoveries
