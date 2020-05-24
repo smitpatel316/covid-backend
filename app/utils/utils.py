@@ -137,3 +137,16 @@ def daily_recoveries(name="Canada"):
                 }
             )
     return date_to_recoveries
+
+
+def daily_tests(name="Canada"):
+    records: [Record] = data_by_name(name).get_records()
+    date_to_tests = {}
+    for (index, record) in enumerate(records):
+        if index == 0:
+            date_to_tests.update({record.get_date(): record.get_tests()})
+        else:
+            date_to_tests.update(
+                {record.get_date(): record.get_tests() - records[index - 1].get_tests()}
+            )
+    return date_to_tests

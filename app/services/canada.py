@@ -39,3 +39,7 @@ def info(name):
 
 def daily_recoveries(name):
     return utils.daily_recoveries(name)
+
+
+def daily_tests(name):
+    return utils.daily_tests(name)

@@ -46,6 +46,9 @@ class Record(object):
     def get_recovered(self):
         return self.recoveries
 
+    def get_tests(self):
+        return self.tested
+
     def get_active_cases(self):
         return self.get_confirmed_cases() - self.get_deaths() - self.get_recovered()
 

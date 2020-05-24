@@ -55,3 +55,8 @@ def canada_info(name):
 @canada.route("/<name>/daily/recoveries")
 def canada_daily_recoveries(name):
     return json.dumps(service.daily_recoveries(name))
+
+
+@canada.route("/<name>/daily/tested")
+def canada_daily_tests(name):
+    return json.dumps(service.daily_tests(name))
